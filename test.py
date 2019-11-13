@@ -1,8 +1,9 @@
 import requests
+import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
-from dicttoxml import dicttoxml
+
 
 def Skyscanner_scrape(url_link):
     scraped_flights = {}
@@ -32,9 +33,8 @@ def Skyscanner_scrape(url_link):
         scraped_flights[i+1] = flight_info
         i += 1
     return scraped_flights
-    
+
 flights = Skyscanner_scrape("https://www.skyscanner.ca/transport/flights/sfo/tyoa/191118/191125/?adults=1&children=0&adultsv2=1&childrenv2=&infants=0&cabinclass=economy&rtn=1&preferdirects=false&outboundaltsenabled=false&inboundaltsenabled=false&ref=home#/")
 
 for flight in flights.values():
     print(flight)
-xml = dicttoxml(flights)
