@@ -23,12 +23,21 @@ def Skyscanner_scrape():
     cheap = driver.find_element_by_xpath("//option[@value='CHEAPEST']")
     cheap.click()
     time.sleep(1)
+    load_more = driver.find_element_by_css_selector("button[class='BpkButton_bpk-button__32HxR BpkButton_bpk-button--secondary__2UhGP']")
+    load_more.click()
+    time.sleep(3)
+    driver.execute_script("window.scrollTo(0,document.body.scrollHeight);")
+    time.sleep(3)
+    driver.execute_script("window.scrollTo(0,document.body.scrollHeight);")
     times = driver.find_elements_by_css_selector("span[class='BpkText_bpk-text__2NHsO BpkText_bpk-text--base__2vfTl BpkText_bpk-text--bold__4yauk']")
-    total_time = driver.find_elements_by_css_selector("span[class='BpkText_bpk-text__2NHsO BpkText_bpk-text--sm__345aT Duration_duration__1QA_S]")
+    # total_time = driver.find_elements_by_css_selector("span[class='BpkText_bpk-text__2NHsO BpkText_bpk-text--sm__345aT Duration_duration__1QA_S]")
     links = driver.find_elements_by_class_name("FlightsTicket_link__kl4DL")
     prices_list = driver.find_elements_by_css_selector("span[class='BpkText_bpk-text__2NHsO BpkText_bpk-text--lg__3vAKN BpkText_bpk-text--bold__4yauk']")
     prices = prices_list[3:]
     i = 0
+    print(f'Number of times: {len(times)}')
+    print(f'Number of links: {len(links)}')
+    print(f'Number of prices: {len(prices)}')
     while i < len(prices):
         flight_info = {"origin_dep_time": times[i*4].text, "destination_arr_time": times[i*4+1].text, "destination_dep_time": times[i*4+2].text, "origin_arr_time": times[i*4+3].text, "price": prices[i].text, "link": links[i].get_attribute("href")}
         scraped_flights[i+1] = flight_info
