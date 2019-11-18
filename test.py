@@ -31,10 +31,10 @@ def Skyscanner_scrape():
     while len(links) < int(num_flights):
         driver.execute_script("window.scrollTo(0,document.body.scrollHeight);")
         links = driver.find_elements_by_class_name("FlightsTicket_link__kl4DL")
-        prices_list = driver.find_elements_by_css_selector("span[class='BpkText_bpk-text__2NHsO BpkText_bpk-text--lg__3vAKN BpkText_bpk-text--bold__4yauk']")
-        times = driver.find_elements_by_css_selector("span[class='BpkText_bpk-text__2NHsO BpkText_bpk-text--base__2vfTl BpkText_bpk-text--bold__4yauk']")
         time.sleep(3)  
+    prices_list = driver.find_elements_by_css_selector("span[class='BpkText_bpk-text__2NHsO BpkText_bpk-text--lg__3vAKN BpkText_bpk-text--bold__4yauk']")
     prices = prices_list[3:]
+    times = driver.find_elements_by_css_selector("span[class='BpkText_bpk-text__2NHsO BpkText_bpk-text--base__2vfTl BpkText_bpk-text--bold__4yauk']")
     i = 0
     print(f'Number of times: {len(times)}')
     print(f'Number of links: {len(links)}')
